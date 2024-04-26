@@ -1,0 +1,10 @@
+{
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  // enable prettier as default formatter for all supported filetypes
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "search.exclude": {
+    "node_modules": true,
+    "coverage": true
+  }
+}
