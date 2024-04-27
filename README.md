@@ -1,16 +1,13 @@
-# quick_task
+<h1 align="center">Quick Task - Flutter Application</h1>
 
-A new Flutter project.
+- Quick Task is a Flutter based mobile application that aims to capture Todo items with their due dates, completion status. And has user authentication so that each user can keep track of their Tasks separately.
 
-## Getting Started
+- This app makes use of Back4app for storing the user's data in an online based NoSQL Database.
 
-This project is a starting point for a Flutter application.
+- List of Features in the app
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  - User Authentication
+    - Users can Register and Login in the app and maintain their Tasks.
+  - Task Management
+    - Users can Add, View, Edit and Delete a Task.
+    - Users can even mark the status of the task as Completed/ Incomplete.

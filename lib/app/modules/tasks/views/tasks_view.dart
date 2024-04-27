@@ -19,8 +19,8 @@ class _TasksViewState extends State<TasksView> {
   final TasksController controller = Get.put(TasksController());
   final GetStorage userData = GetStorage();
   late bool isSwitched;
-  late FocusNode _focusNode;
-  late TextEditingController _dateController;
+  late FocusNode focusNode;
+  late TextEditingController dateController;
   bool isTitleNotEmpty = false;
 
   @override
@@ -33,15 +33,25 @@ class _TasksViewState extends State<TasksView> {
       isSwitched = false;
     }
     super.initState();
-    _focusNode = FocusNode();
+    focusNode = FocusNode();
     controller.titleController!.addListener(titleChanged);
     if (widget.currentTask != null) {
       controller.task = widget.currentTask;
       controller.showCurrentTask();
     }
-    _dateController = TextEditingController();
-    _dateController =
-        TextEditingController(text: DateFormat.yMMMd().format(DateTime.now()));
+    dateController = TextEditingController();
+    if (widget.currentTask != null &&
+        widget.currentTask!.title != null &&
+        widget.currentTask!.title!.isNotEmpty) {
+      dateController = TextEditingController(
+        text: controller.task?.taskDueDate != null
+            ? DateFormat.yMMMd().format(controller.task!.taskDueDate!)
+            : '',
+      );
+    } else {
+      dateController = TextEditingController(
+          text: DateFormat.yMMMd().format(DateTime.now()));
+    }
   }
 
   void toggleSwitch(bool value) {
@@ -103,13 +113,13 @@ class _TasksViewState extends State<TasksView> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          _focusNode.requestFocus();
+                          focusNode.requestFocus();
                           _selectDueDate(context);
                         },
                         child: AbsorbPointer(
                           child: TextFormField(
-                            focusNode: _focusNode,
-                            controller: _dateController,
+                            focusNode: focusNode,
+                            controller: dateController,
                             readOnly: true,
                             decoration: const InputDecoration(
                               hintText: 'Select Due Date',
@@ -272,14 +282,14 @@ class _TasksViewState extends State<TasksView> {
     if (pickedDate != null) {
       controller.updateDueDate(pickedDate);
       setState(() {
-        _dateController.text = DateFormat.yMMMd().format(pickedDate);
+        dateController.text = DateFormat.yMMMd().format(pickedDate);
       });
     }
   }
 
   @override
   void dispose() {
-    _dateController.dispose();
+    dateController.dispose();
     controller.titleController!.removeListener(titleChanged);
     super.dispose();
   }
