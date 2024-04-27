@@ -213,20 +213,22 @@ class TasksController extends GetxController {
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          content: const Text(
-            'Are you sure you want to delete the task?',
-          ),
+          backgroundColor: Colors.white,
+          content: const Text('Are you sure you want to delete the task?',
+              style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 deleteTask(objectId);
               },
-              child: const Text("DELETE"),
+              child:
+                  const Text("DELETE", style: TextStyle(color: Colors.black)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("CANCEL"),
+              child:
+                  const Text("CANCEL", style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

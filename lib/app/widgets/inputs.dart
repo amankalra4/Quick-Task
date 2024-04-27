@@ -4,12 +4,14 @@ class FormInput extends StatelessWidget {
   final String? iLabel;
   final TextEditingController? iController;
   final List<String>? iOptions;
+  final void Function(String)? onChanged;
 
   const FormInput({
     Key? key,
     this.iLabel = "",
     this.iController,
     required this.iOptions,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class FormInput extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15),
       child: TextFormField(
         controller: iController,
+        onChanged: onChanged,
         readOnly: iOptions!.isNotEmpty ? true : false,
         onTap: () {
           if (iOptions!.isNotEmpty) {
@@ -51,6 +54,7 @@ class FormInput extends StatelessWidget {
               (listItem) => ListTile(
                 onTap: () {
                   iController!.text = listItem;
+                  onChanged?.call(listItem);
                   Navigator.pop(context);
                 },
                 title: Column(

@@ -14,7 +14,11 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
+      appBar: AppBar(
+        title: const Text(
+          AppConstants.registerTitle,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -36,25 +40,35 @@ class RegisterView extends StatelessWidget {
                 hintText: 'Enter your password',
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    String userName = userNameController.text;
-                    String password = passwordController.text;
-                    bool? success =
-                        await controller.createUser(userName, password);
-                    if (success == true) {
-                      await saveToSharedPreferences('userLoggedIn', true);
-                      Get.to(
-                        () => HomeView(),
-                        transition: Transition.rightToLeft,
-                      );
-                    }
-                  },
-                  child: const Text('Register'),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          String userName = userNameController.text;
+                          String password = passwordController.text;
+                          bool? success =
+                              await controller.createUser(userName, password);
+                          if (success == true) {
+                            await saveToSharedPreferences('userLoggedIn', true);
+                            Get.to(
+                              () => HomeView(),
+                              transition: Transition.rightToLeft,
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.withOpacity(0.6),
+                        ),
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(color: Colors.white, fontSize: 17),
+                        ),
+                      )),
                 ),
               ],
             ),

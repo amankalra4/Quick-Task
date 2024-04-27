@@ -27,11 +27,11 @@ class HomeView extends StatelessWidget {
           children: [
             Container(
               height: 150,
-              child: const DrawerHeader(
+              child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.blue.withOpacity(0.6),
                 ),
-                child: Text(
+                child: const Text(
                   'Quick Task',
                   style: TextStyle(
                     color: Colors.white,
@@ -65,7 +65,8 @@ class HomeView extends StatelessWidget {
         onPressed: () {
           Get.to(() => TasksView(), transition: Transition.rightToLeft);
         },
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.blue.withOpacity(0.6),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -127,18 +128,17 @@ class HomeView extends StatelessWidget {
     Color iconColor = task.taskCompleted! ? Colors.green : Colors.red;
 
     return ListTile(
-      leading: const Icon(Icons.task),
+      leading: Icon(
+        iconData,
+        color: iconColor,
+      ),
       title: Text(
         task.title!,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
-      subtitle: Text(
+      trailing: Text(
         formattedDueDate,
         style: const TextStyle(fontSize: 14),
-      ),
-      trailing: Icon(
-        iconData,
-        color: iconColor,
       ),
       onTap: () {
         Get.to(
