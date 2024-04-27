@@ -97,7 +97,7 @@ class _TasksViewState extends State<TasksView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 FormInput(
-                  iLabel: 'Title',
+                  iLabel: 'Task Title',
                   iController: controller.titleController!,
                   iOptions: const <String>[],
                   onChanged: (value) {
@@ -108,28 +108,39 @@ class _TasksViewState extends State<TasksView> {
                 ),
                 const SizedBox(height: 20),
                 const SizedBox(height: 10),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          focusNode.requestFocus();
-                          _selectDueDate(context);
-                        },
-                        child: AbsorbPointer(
-                          child: TextFormField(
-                            focusNode: focusNode,
-                            controller: dateController,
-                            readOnly: true,
-                            decoration: const InputDecoration(
-                              hintText: 'Select Due Date',
-                              border: UnderlineInputBorder(),
-                              contentPadding: EdgeInsets.zero,
+                    const Text(
+                      'Due Date',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              focusNode.requestFocus();
+                              _selectDueDate(context);
+                            },
+                            child: AbsorbPointer(
+                              child: TextFormField(
+                                focusNode: focusNode,
+                                controller: dateController,
+                                readOnly: true,
+                                decoration: const InputDecoration(
+                                  hintText: 'Select Due Date',
+                                  border: UnderlineInputBorder(),
+                                  contentPadding: EdgeInsets.zero,
+                                ),
+                                style: const TextStyle(fontSize: 20),
+                              ),
                             ),
-                            style: const TextStyle(fontSize: 20),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),

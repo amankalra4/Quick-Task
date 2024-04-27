@@ -34,7 +34,7 @@ class FormInput extends StatelessWidget {
         },
         decoration: InputDecoration(
           labelText: iLabel,
-          labelStyle: TextStyle(fontSize: 16),
+          labelStyle: TextStyle(fontSize: 18),
         ),
         style: const TextStyle(
           fontSize: 18,
